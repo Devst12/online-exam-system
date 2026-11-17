@@ -6,10 +6,8 @@
           <i class="bi bi-mortarboard-fill" style="color:var(--oes-primary); font-size:1.4rem"></i>
           <span class="fw-bold fs-5"><?= e(APP_NAME) ?></span>
         </div>
-        <p class="text-muted small mb-3">A modern, secure platform for college quizzes &amp; exams. Free to use, learn from, and extend for your own projects.</p>
-        <a class="text-decoration-none small d-inline-flex align-items-center gap-1" href="mailto:aashish@marketdoctorsonline.com">
-          <i class="bi bi-envelope-fill"></i> aashish@marketdoctorsonline.com
-        </a>
+       
+        
       </div>
 
       <div class="col-6 col-lg-3">
@@ -30,13 +28,13 @@
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 small text-muted">
       <div>
         &copy; <?= date('Y') ?> <strong><?= e(APP_NAME) ?></strong> &middot; Crafted by
-        <a class="text-decoration-none fw-semibold" href="https://github.com/aashishbharti04" target="_blank" rel="noopener">Aashish Bharti</a>.
+        <a class="text-decoration-none fw-semibold" href="##" target="_blank" rel="noopener">Man Kumar Ghising</a>.
         All rights reserved.
       </div>
       <div>
-        Licensed under <a class="text-decoration-none" href="https://github.com/aashishbharti04/online-exam-system/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a>
+        Licensed under <a class="text-decoration-none" href="##" target="_blank" rel="noopener">MIT</a>
         &middot;
-        <a class="text-decoration-none" href="https://github.com/aashishbharti04/online-exam-system" target="_blank" rel="noopener"><i class="bi bi-github"></i> Source</a>
+        
       </div>
     </div>
   </div>
