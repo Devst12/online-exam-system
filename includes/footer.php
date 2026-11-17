@@ -22,26 +22,7 @@
         </ul>
       </div>
 
-      <div class="col-6 col-lg-4">
-        <h6 class="text-uppercase small fw-bold text-muted mb-3">Connect with the developer</h6>
-        <div class="d-flex flex-wrap gap-2">
-          <a class="btn btn-sm btn-outline-secondary social-btn" href="https://in.linkedin.com/in/aashana1012" target="_blank" rel="noopener" title="LinkedIn">
-            <i class="bi bi-linkedin"></i> LinkedIn
-          </a>
-          <a class="btn btn-sm btn-outline-secondary social-btn" href="https://github.com/aashishbharti04" target="_blank" rel="noopener" title="GitHub">
-            <i class="bi bi-github"></i> GitHub
-          </a>
-          <a class="btn btn-sm btn-outline-secondary social-btn" href="https://www.youtube.com/@CodeWithAsur" target="_blank" rel="noopener" title="YouTube">
-            <i class="bi bi-youtube"></i> YouTube
-          </a>
-          <a class="btn btn-sm btn-outline-secondary social-btn" href="https://www.instagram.com/asurwave1012" target="_blank" rel="noopener" title="Instagram">
-            <i class="bi bi-instagram"></i> Instagram
-          </a>
-        </div>
-        <div class="small text-muted mt-3">
-          <i class="bi bi-code-slash"></i> Subscribe to <a class="text-decoration-none" href="https://www.youtube.com/@CodeWithAsur" target="_blank" rel="noopener">@CodeWithAsur</a> for more PHP / web-dev tutorials.
-        </div>
-      </div>
+      
     </div>
 
     <hr class="my-3 opacity-25">
