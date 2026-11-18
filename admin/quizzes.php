@@ -149,9 +149,9 @@ include __DIR__ . '/_nav.php';
                   <?php endif; ?>
                 </td>
                 <td class="text-end">
-                  <a class="btn btn-sm btn-outline-secondary" href="<?= e(base_url('admin/questions.php?quiz='.(int)$r['id'])) ?>"><i class="bi bi-list-check"></i></a>
-                  <a class="btn btn-sm btn-outline-primary" href="<?= e(base_url('admin/quizzes.php?action=edit&id='.(int)$r['id'])) ?>"><i class="bi bi-pencil"></i></a>
-                  <a class="btn btn-sm btn-outline-danger" href="<?= e(base_url('admin/quizzes.php?action=delete&id='.(int)$r['id'].'&csrf_token='.urlencode(csrf_token()))) ?>" data-confirm="Delete this quiz and all of its questions/attempts? This cannot be undone."><i class="bi bi-trash"></i></a>
+                  <a class="btn btn-sm btn-outline-secondary" href="<?= e(base_url('admin/questions.php?quiz='.(int)$r['id'])) ?>" aria-label="Manage questions for <?= e($r['title']) ?>" title="Manage questions"><i class="bi bi-list-check"></i></a>
+                  <a class="btn btn-sm btn-outline-primary" href="<?= e(base_url('admin/quizzes.php?action=edit&id='.(int)$r['id'])) ?>" aria-label="Edit <?= e($r['title']) ?>" title="Edit quiz"><i class="bi bi-pencil"></i></a>
+                  <a class="btn btn-sm btn-outline-danger" href="<?= e(base_url('admin/quizzes.php?action=delete&id='.(int)$r['id'].'&csrf_token='.urlencode(csrf_token()))) ?>" aria-label="Delete <?= e($r['title']) ?>" title="Delete quiz" data-confirm="All questions and attempts for this quiz will also be removed." data-confirm-title="Delete this quiz?" data-confirm-action="Delete quiz" data-confirm-destructive="true"><i class="bi bi-trash"></i></a>
                 </td>
               </tr>
             <?php endforeach; ?>

@@ -5,23 +5,25 @@
   // ---------- Theme toggle ----------
   const savedTheme = localStorage.getItem('oes-theme') || 'light';
   document.documentElement.setAttribute('data-bs-theme', savedTheme);
-  const themeBtn = document.getElementById('themeToggle');
-  if (themeBtn) {
-    const updateIcon = () => {
-      const t = document.documentElement.getAttribute('data-bs-theme');
-      themeBtn.innerHTML = t === 'dark'
-        ? '<i class="bi bi-sun"></i>'
-        : '<i class="bi bi-moon-stars"></i>';
-    };
-    updateIcon();
-    themeBtn.addEventListener('click', () => {
-      const cur = document.documentElement.getAttribute('data-bs-theme');
-      const next = cur === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-bs-theme', next);
-      localStorage.setItem('oes-theme', next);
-      updateIcon();
+  const themeButtons = document.querySelectorAll('[data-theme-toggle]');
+  const updateThemeControls = () => {
+    const dark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+    document.querySelectorAll('[data-theme-icon]').forEach(icon => {
+      icon.classList.toggle('bi-sun', dark);
+      icon.classList.toggle('bi-moon-stars', !dark);
     });
-  }
+    document.querySelectorAll('[data-theme-label]').forEach(label => {
+      label.textContent = dark ? 'Light appearance' : 'Dark appearance';
+    });
+    themeButtons.forEach(button => button.setAttribute('aria-pressed', dark ? 'true' : 'false'));
+  };
+  updateThemeControls();
+  themeButtons.forEach(button => button.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-bs-theme', next);
+    localStorage.setItem('oes-theme', next);
+    updateThemeControls();
+  }));
 
   // ---------- Exam timer ----------
   const timerEl = document.getElementById('examTimer');
@@ -88,13 +90,66 @@
     updatePalette();
   }
 
-  // ---------- Confirm destructive actions ----------
-  document.querySelectorAll('[data-confirm]').forEach(el => {
-    el.addEventListener('click', (e) => {
-      if (!confirm(el.dataset.confirm)) {
-        e.preventDefault();
+  // ---------- Branded confirmations ----------
+  const confirmDialog = document.getElementById('appConfirm');
+  if (confirmDialog) {
+    const dialogTitle = document.getElementById('appConfirmTitle');
+    const dialogMessage = document.getElementById('appConfirmMessage');
+    const dialogNote = confirmDialog.querySelector('[data-dialog-note]');
+    const cancelButton = confirmDialog.querySelector('[data-dialog-cancel]');
+    const acceptButton = confirmDialog.querySelector('[data-dialog-confirm]');
+    let pendingAction = null;
+    const hasNativeDialog = typeof confirmDialog.showModal === 'function';
+    const closeDialog = () => {
+      if (hasNativeDialog) confirmDialog.close();
+      else {
+        confirmDialog.removeAttribute('open');
+        confirmDialog.classList.remove('app-dialog--fallback');
+        pendingAction = null;
+      }
+    };
+
+    document.addEventListener('click', event => {
+      const trigger = event.target.closest('[data-confirm]');
+      if (!trigger) return;
+      event.preventDefault();
+      pendingAction = trigger;
+      const destructive = trigger.dataset.confirmDestructive === 'true';
+      dialogTitle.textContent = trigger.dataset.confirmTitle || 'Please confirm';
+      dialogMessage.textContent = trigger.dataset.confirm;
+      dialogNote.hidden = !destructive;
+      acceptButton.textContent = trigger.dataset.confirmAction || (destructive ? 'Delete' : 'Continue');
+      acceptButton.classList.toggle('btn-danger', destructive);
+      acceptButton.classList.toggle('btn-primary', !destructive);
+      if (hasNativeDialog) confirmDialog.showModal();
+      else {
+        confirmDialog.classList.add('app-dialog--fallback');
+        confirmDialog.setAttribute('open', '');
       }
     });
+
+    cancelButton.addEventListener('click', closeDialog);
+    confirmDialog.addEventListener('close', () => { pendingAction = null; });
+    confirmDialog.addEventListener('click', event => {
+      if (event.target === confirmDialog) closeDialog();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && confirmDialog.open) closeDialog();
+    });
+    acceptButton.addEventListener('click', () => {
+      const action = pendingAction;
+      if (!action) return closeDialog();
+      closeDialog();
+      if (action.tagName === 'A' && action.href) window.location.assign(action.href);
+      else if (action.form) action.form.requestSubmit();
+    });
+  }
+
+  // ---------- Inline action notices ----------
+  document.querySelectorAll('.app-notice').forEach(notice => {
+    const dismiss = () => notice.remove();
+    notice.querySelector('.notice-close')?.addEventListener('click', dismiss);
+    window.setTimeout(dismiss, notice.classList.contains('app-notice--error') ? 7500 : 5200);
   });
 
   // ---------- Score ring animation ----------

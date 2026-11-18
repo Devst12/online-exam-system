@@ -48,7 +48,7 @@ include __DIR__ . '/includes/header.php';
       <div class="card p-4 p-md-5">
         <span class="eyebrow">Student account</span>
         <h1 class="h3 mb-1">Sign in</h1>
-        <p class="text-muted">Use your account to continue.</p>
+        <p class="text-muted">Sign in with the email and password given to you by your administrator.</p>
 
         <?php foreach ($errors as $err): ?>
           <div class="alert alert-danger"><i class="bi bi-exclamation-triangle"></i> <?= e($err) ?></div>
@@ -70,8 +70,8 @@ include __DIR__ . '/includes/header.php';
             <i class="bi bi-box-arrow-in-right"></i> Sign in
           </button>
           <div class="text-center mt-3 small text-muted">
-            New here? <a href="<?= e(base_url('register.php')) ?>">Create a student account</a>
-            &middot;
+            Need an account? Ask your administrator for access.
+            <br>
             <a href="<?= e(base_url('admin/login.php')) ?>">Admin login</a>
           </div>
         </form>

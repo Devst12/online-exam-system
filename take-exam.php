@@ -48,7 +48,7 @@ include __DIR__ . '/includes/header.php';
       <h1><?= e($quiz['title']) ?></h1>
       <?php if ($quiz['intro']): ?><p class="text-muted mb-0"><?= e($quiz['intro']) ?></p><?php endif; ?>
     </div>
-    <a href="<?= e(base_url('exams.php')) ?>" class="small text-muted text-decoration-none" data-confirm="Leave the exam? Your answers will not be saved."><i class="bi bi-x-lg"></i><span class="d-none d-sm-inline"> Exit</span></a>
+    <a href="<?= e(base_url('exams.php')) ?>" class="small text-muted text-decoration-none" data-confirm="Your answers in this attempt will not be saved." data-confirm-title="Leave this exam?" data-confirm-action="Leave exam"><i class="bi bi-x-lg"></i><span class="d-none d-sm-inline"> Exit</span></a>
   </div>
 
   <form id="examForm" method="post" action="<?= e(base_url('submit-exam.php')) ?>" data-question-count="<?= count($questions) ?>">

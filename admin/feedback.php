@@ -50,7 +50,7 @@ include __DIR__ . '/_nav.php';
           <div class="text-end small">
             <a class="text-decoration-none" href="<?= e(base_url('admin/feedback.php?action=mark&id='.(int)$f['id'].'&csrf_token='.urlencode(csrf_token()))) ?>"><?= $f['is_read']?'Mark unread':'Mark read' ?></a>
             &middot;
-            <a class="text-decoration-none text-danger" href="<?= e(base_url('admin/feedback.php?action=delete&id='.(int)$f['id'].'&csrf_token='.urlencode(csrf_token()))) ?>" data-confirm="Delete this feedback?">Delete</a>
+            <a class="text-decoration-none text-danger" href="<?= e(base_url('admin/feedback.php?action=delete&id='.(int)$f['id'].'&csrf_token='.urlencode(csrf_token()))) ?>" data-confirm="This message will be permanently removed." data-confirm-title="Delete this feedback?" data-confirm-action="Delete message" data-confirm-destructive="true">Delete</a>
           </div>
         </div>
       <?php endforeach; ?>

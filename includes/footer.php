@@ -14,6 +14,16 @@
     </div>
   </div>
 </footer>
+<dialog class="app-dialog" id="appConfirm" aria-labelledby="appConfirmTitle" aria-describedby="appConfirmMessage">
+  <div class="app-dialog-mark" aria-hidden="true"><i class="bi bi-question-lg"></i></div>
+  <h2 id="appConfirmTitle">Are you sure?</h2>
+  <p id="appConfirmMessage"></p>
+  <p class="app-dialog-note" data-dialog-note hidden>This action can’t be undone.</p>
+  <div class="app-dialog-actions">
+    <button type="button" class="btn btn-outline-secondary" data-dialog-cancel>Cancel</button>
+    <button type="button" class="btn btn-primary" data-dialog-confirm>Continue</button>
+  </div>
+</dialog>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="<?= e(base_url('assets/js/app.js')) ?>"></script>

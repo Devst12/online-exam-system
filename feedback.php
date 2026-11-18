@@ -49,7 +49,7 @@ include __DIR__ . '/includes/header.php';
         <p class="text-muted">Report an issue or share a suggestion with the team.</p>
 
         <?php if ($ok): ?>
-          <div class="alert alert-success"><i class="bi bi-check-circle"></i> Thanks! Your feedback has been recorded.</div>
+          <div class="app-notice app-notice--success" role="status"><i class="bi bi-check-circle" aria-hidden="true"></i><span>Thanks. Your feedback has been recorded.</span><button type="button" class="notice-close" aria-label="Dismiss message">&times;</button></div>
         <?php endif; ?>
         <?php foreach ($errors as $err): ?>
           <div class="alert alert-danger"><i class="bi bi-exclamation-triangle"></i> <?= e($err) ?></div>

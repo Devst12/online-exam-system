@@ -178,8 +178,8 @@ include __DIR__ . '/_nav.php';
                 </div>
               </div>
               <div class="text-nowrap">
-                <a class="btn btn-sm btn-outline-primary" href="<?= e(base_url('admin/questions.php?quiz='.$quizId.'&action=edit&id='.(int)$q['id'])) ?>"><i class="bi bi-pencil"></i></a>
-                <a class="btn btn-sm btn-outline-danger" href="<?= e(base_url('admin/questions.php?quiz='.$quizId.'&action=delete&id='.(int)$q['id'].'&csrf_token='.urlencode(csrf_token()))) ?>" data-confirm="Delete this question?"><i class="bi bi-trash"></i></a>
+                <a class="btn btn-sm btn-outline-primary" href="<?= e(base_url('admin/questions.php?quiz='.$quizId.'&action=edit&id='.(int)$q['id'])) ?>" aria-label="Edit question"><i class="bi bi-pencil"></i></a>
+                <a class="btn btn-sm btn-outline-danger" href="<?= e(base_url('admin/questions.php?quiz='.$quizId.'&action=delete&id='.(int)$q['id'].'&csrf_token='.urlencode(csrf_token()))) ?>" aria-label="Delete question" data-confirm="This question will be removed from the quiz." data-confirm-title="Delete this question?" data-confirm-action="Delete question" data-confirm-destructive="true"><i class="bi bi-trash"></i></a>
               </div>
             </div>
           </li>
