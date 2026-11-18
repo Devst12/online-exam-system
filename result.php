@@ -72,7 +72,7 @@ include __DIR__ . '/includes/header.php';
         </div>
 
         <div class="d-flex flex-wrap gap-2 mt-4">
-          <a class="btn btn-outline-primary" href="<?= e(base_url('export.php?type=pdf&attempt=' . (int) $att['id'])) ?>" target="_blank"><i class="bi bi-file-earmark-pdf"></i> Download PDF</a>
+          <a class="btn btn-outline-primary" href="<?= e(base_url('export.php?type=pdf&attempt=' . (int) $att['id'])) ?>" target="_blank" rel="noopener"><i class="bi bi-file-earmark-pdf"></i> Print / save PDF</a>
           <a class="btn btn-outline-secondary" href="<?= e(base_url('export.php?type=csv&attempt=' . (int) $att['id'])) ?>"><i class="bi bi-filetype-csv"></i> Export CSV</a>
           <a class="btn btn-primary" href="<?= e(base_url('take-exam.php?quiz=' . (int) $att['quiz_id'])) ?>"><i class="bi bi-arrow-clockwise"></i> Retake</a>
         </div>

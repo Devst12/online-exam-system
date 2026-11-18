@@ -81,34 +81,62 @@ if ($type === 'pdf') {
       <meta charset="utf-8">
       <title>Attempt report · <?= e($a['qtitle']) ?></title>
       <style>
-        @page { size: A4; margin: 1.2cm; }
-        body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; color:#111; }
-        h1 { font-size: 22px; margin: 0 0 6px; }
+        @page { size: A4; margin: 14mm 13mm; }
+        * { box-sizing: border-box; }
+        body { max-width: 980px; margin: 28px auto; padding: 0 20px; color: #202b25; font: 14px/1.45 Arial, Helvetica, sans-serif; }
+        h1 { margin: 0 0 5px; font-size: 24px; line-height: 1.2; overflow-wrap: anywhere; }
         h1 span { color: #245b46; }
-        .sub { color: #555; font-size: 13px; }
-        .grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 18px 0; }
-        .card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px 14px; }
-        .card .lbl { font-size: 11px; color: #6b7280; text-transform: uppercase; }
-        .card .val { font-size: 20px; font-weight: 700; }
-        .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
-        .ok   { background:#dcfce7; color:#166534; }
-        .bad  { background:#fee2e2; color:#991b1b; }
-        .warn { background:#fef3c7; color:#92400e; }
-        table { width:100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
-        th, td { border-bottom:1px solid #e5e7eb; padding: 8px; text-align:left; vertical-align: top; }
-        th { background:#f9fafb; }
-        .toolbar { margin-bottom: 12px; }
-        .toolbar button { background:#245b46; color:white; border:0; padding:8px 14px; border-radius:6px; font-size:13px; cursor:pointer; }
-        @media print { .toolbar { display:none; } }
+        h2 { margin: 0; font-size: 15px; }
+        .sub { color: #66736b; font-size: 12px; }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 22px; padding: 12px 14px; border: 1px solid #dfe5df; border-radius: 7px; background: #f5f6f2; }
+        .toolbar p { margin: 0; color: #59665e; font-size: 12px; }
+        .toolbar button { flex: 0 0 auto; min-height: 40px; padding: 8px 14px; border: 0; border-radius: 6px; color: #fff; background: #245b46; font-size: 13px; font-weight: 700; cursor: pointer; }
+        .report-head { padding-bottom: 14px; border-bottom: 2px solid #245b46; }
+        .report-kicker { margin-bottom: 5px; color: #245b46; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        .grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 9px; margin: 16px 0; }
+        .card { min-width: 0; border: 1px solid #dfe5df; border-radius: 6px; padding: 10px 11px; break-inside: avoid; }
+        .card .lbl { margin-bottom: 4px; color: #66736b; font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+        .card .val { font-size: 18px; font-weight: 700; overflow-wrap: anywhere; }
+        .badge { display: inline-block; padding: 3px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+        .ok   { color:#166534; background:#dcfce7; }
+        .bad  { color:#991b1b; background:#fee2e2; }
+        .warn { color:#92400e; background:#fef3c7; }
+        .summary { margin: 12px 0 18px; }
+        .table-title { margin: 20px 0 6px; }
+        table { width:100%; border-collapse: collapse; table-layout: fixed; margin-top: 8px; font-size: 11px; }
+        th, td { padding: 7px 6px; border-bottom: 1px solid #dfe5df; text-align:left; vertical-align: top; overflow-wrap: anywhere; }
+        th { color: #526057; background:#f2f5f1; font-size: 9px; letter-spacing: .045em; text-transform: uppercase; }
+        thead { display: table-header-group; }
+        tr { break-inside: avoid; }
+        .report-footer { margin-top: 22px; padding-top: 9px; border-top: 1px solid #dfe5df; }
+        @media (max-width: 640px) {
+          body { margin: 14px auto; padding: 0 12px; font-size: 13px; }
+          .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+          table { font-size: 10px; }
+          th, td { padding: 6px 4px; }
+          .toolbar { align-items: flex-start; flex-direction: column; }
+        }
+        @media print {
+          html, body { width: auto; max-width: none; margin: 0; padding: 0; background: #fff; }
+          body { font-size: 10pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          .toolbar { display: none !important; }
+          .report-head { break-after: avoid; }
+          a { color: inherit; text-decoration: none; }
+          th { background: #f2f5f1 !important; }
+        }
       </style>
     </head>
     <body>
       <div class="toolbar">
-        <button onclick="window.print()">Print / Save as PDF</button>
+        <p>Choose <strong>Save as PDF</strong> in the print window to download this report.</p>
+        <button type="button" onclick="window.print()">Print / Save as PDF</button>
       </div>
 
-      <h1>Online Exam System · <span>Attempt report</span></h1>
-      <div class="sub"><?= e($a['qtitle']) ?> &middot; <?= e($a['tag'] ?: 'General') ?> &middot; Submitted <?= e(date('d M Y, H:i', strtotime($a['submitted_at']))) ?></div>
+      <header class="report-head">
+        <div class="report-kicker">Online Exam System · Attempt report</div>
+        <h1><?= e($a['qtitle']) ?></h1>
+        <div class="sub"><?= e($a['tag'] ?: 'General') ?> &middot; Submitted <?= e(date('d M Y, H:i', strtotime($a['submitted_at']))) ?></div>
+      </header>
 
       <div class="grid">
         <div class="card"><div class="lbl">Student</div><div class="val" style="font-size:15px"><?= e($a['uname']) ?></div><div class="sub"><?= e($a['uemail']) ?></div></div>
@@ -119,10 +147,11 @@ if ($type === 'pdf') {
         <div class="card"><div class="lbl">Time taken</div><div class="val" style="font-size:16px"><?= e(format_duration_seconds((int)$a['time_taken_sec'])) ?></div></div>
       </div>
 
-      <p class="sub">Correct: <strong><?= (int) $a['correct_count'] ?></strong> &middot; Wrong: <strong><?= (int) $a['wrong_count'] ?></strong> &middot; Skipped: <strong><?= (int) $a['unanswered_count'] ?></strong></p>
+      <p class="sub summary">Correct: <strong><?= (int) $a['correct_count'] ?></strong> &middot; Wrong: <strong><?= (int) $a['wrong_count'] ?></strong> &middot; Skipped: <strong><?= (int) $a['unanswered_count'] ?></strong></p>
 
+      <h2 class="table-title">Question breakdown</h2>
       <table>
-        <thead><tr><th style="width:30px">#</th><th>Question</th><th>Your answer</th><th>Correct</th><th>Result</th></tr></thead>
+        <thead><tr><th style="width:5%">#</th><th style="width:35%">Question</th><th style="width:22%">Your answer</th><th style="width:22%">Correct</th><th style="width:16%">Result</th></tr></thead>
         <tbody>
         <?php $i=1; foreach ($rows as $r): ?>
           <tr>
@@ -136,8 +165,7 @@ if ($type === 'pdf') {
         </tbody>
       </table>
 
-      <p class="sub" style="margin-top:24px">Generated by Online Exam System on <?= e(date('d M Y, H:i')) ?>.</p>
-      <script>window.onload = () => setTimeout(() => window.print(), 350);</script>
+      <p class="sub report-footer">Generated by Online Exam System on <?= e(date('d M Y, H:i')) ?>.</p>
     </body></html>
     <?php
     exit;
