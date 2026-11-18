@@ -27,7 +27,9 @@ $adminActive = 'feedback';
 include __DIR__ . '/_nav.php';
 ?>
 <div class="container">
-  <h3 class="mb-3">Feedback</h3>
+  <div class="page-heading mt-2">
+    <div><span class="eyebrow">Inbox</span><h1>Feedback</h1><p>Messages submitted by students.</p></div>
+  </div>
   <?php if (!$rows): ?>
     <div class="card p-5 text-center text-muted">No feedback yet.</div>
   <?php else: ?>

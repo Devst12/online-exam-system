@@ -48,13 +48,16 @@ $activeNav = 'profile';
 include __DIR__ . '/includes/header.php';
 ?>
 <div class="container py-4">
-  <div class="d-flex align-items-center mb-4">
-    <div class="me-3" style="width:56px;height:56px;border-radius:50%;background:rgba(79,70,229,.1);display:grid;place-items:center;font-size:1.5rem;color:var(--oes-primary);font-weight:700">
+  <div class="page-heading">
+    <div class="d-flex align-items-center gap-3">
+    <div class="profile-avatar" aria-hidden="true">
       <?= e(mb_strtoupper(mb_substr($me['name'],0,1))) ?>
     </div>
     <div>
-      <h3 class="mb-0"><?= e($me['name']) ?></h3>
+      <span class="eyebrow">Your account</span>
+      <h1 class="h3 mb-0"><?= e($me['name']) ?></h1>
       <small class="text-muted">Member since <?= e(date('M Y', strtotime($me['created_at']))) ?></small>
+    </div>
     </div>
   </div>
 
@@ -65,7 +68,7 @@ include __DIR__ . '/includes/header.php';
   <div class="row g-4">
     <div class="col-lg-7">
       <div class="card p-4">
-        <h5 class="mb-3"><i class="bi bi-person"></i> Personal details</h5>
+        <div class="section-heading"><h2>Personal details</h2></div>
         <form method="post">
           <?= csrf_field() ?>
           <input type="hidden" name="action" value="update_profile">
@@ -101,7 +104,7 @@ include __DIR__ . '/includes/header.php';
     </div>
     <div class="col-lg-5">
       <div class="card p-4">
-        <h5 class="mb-3"><i class="bi bi-lock"></i> Change password</h5>
+        <div class="section-heading"><h2>Change password</h2></div>
         <form method="post">
           <?= csrf_field() ?>
           <input type="hidden" name="action" value="change_password">

@@ -84,7 +84,7 @@ if ($type === 'pdf') {
         @page { size: A4; margin: 1.2cm; }
         body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; color:#111; }
         h1 { font-size: 22px; margin: 0 0 6px; }
-        h1 span { color: #4f46e5; }
+        h1 span { color: #245b46; }
         .sub { color: #555; font-size: 13px; }
         .grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 18px 0; }
         .card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px 14px; }
@@ -98,7 +98,7 @@ if ($type === 'pdf') {
         th, td { border-bottom:1px solid #e5e7eb; padding: 8px; text-align:left; vertical-align: top; }
         th { background:#f9fafb; }
         .toolbar { margin-bottom: 12px; }
-        .toolbar button { background:#4f46e5; color:white; border:0; padding:8px 14px; border-radius:8px; font-size:13px; cursor:pointer; }
+        .toolbar button { background:#245b46; color:white; border:0; padding:8px 14px; border-radius:6px; font-size:13px; cursor:pointer; }
         @media print { .toolbar { display:none; } }
       </style>
     </head>

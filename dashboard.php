@@ -45,52 +45,32 @@ $activeNav = 'dashboard';
 include __DIR__ . '/includes/header.php';
 ?>
 <div class="container py-4">
-  <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-2">
-    <div>
-      <h2 class="mb-1">Hello, <?= e(explode(' ', $me['name'])[0]) ?> 👋</h2>
-      <p class="text-muted mb-0">Here's your exam performance at a glance.</p>
-    </div>
-    <a href="<?= e(base_url('exams.php')) ?>" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Browse exams</a>
+  <div class="page-heading">
+    <div><span class="eyebrow">Student workspace</span><h1>Hello, <?= e(explode(' ', $me['name'])[0]) ?></h1><p>Your recent activity and exam progress.</p></div>
+    <a href="<?= e(base_url('exams.php')) ?>" class="btn btn-primary"><i class="bi bi-search"></i> Find an exam</a>
   </div>
 
-  <div class="row g-3 mb-4">
-    <?php
-    $cards = [
-      ['Attempts',     (int) $st['attempts'],              'bi-clipboard-check',  'primary'],
-      ['Total score',  (int) $st['total_score'],           'bi-stars',            'success'],
-      ['Average %',    number_format((float) $st['avg_percent'], 1) . '%', 'bi-graph-up', 'info'],
-      ['Best %',       number_format((float) $st['best_percent'], 1) . '%', 'bi-trophy', 'warning'],
-    ];
-    foreach ($cards as [$label,$value,$icon,$color]):
-    ?>
-      <div class="col-6 col-lg-3">
-        <div class="card p-3 h-100">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <div class="text-muted small text-uppercase"><?= e($label) ?></div>
-              <div class="fs-3 fw-bold mt-1"><?= e((string) $value) ?></div>
-            </div>
-            <div class="feature-icon text-<?= e($color) ?>" style="color:inherit"><i class="bi <?= e($icon) ?>"></i></div>
-          </div>
-        </div>
-      </div>
-    <?php endforeach; ?>
+  <div class="stat-strip" aria-label="Exam statistics">
+    <div class="stat-item"><div class="stat-label">Attempts</div><div class="stat-value"><?= (int) $st['attempts'] ?></div></div>
+    <div class="stat-item"><div class="stat-label">Points earned</div><div class="stat-value"><?= (int) $st['total_score'] ?></div></div>
+    <div class="stat-item"><div class="stat-label">Average score</div><div class="stat-value"><?= number_format((float) $st['avg_percent'], 1) ?>%</div></div>
+    <div class="stat-item"><div class="stat-label">Best score</div><div class="stat-value"><?= number_format((float) $st['best_percent'], 1) ?>%</div></div>
   </div>
 
   <div class="row g-4">
     <div class="col-lg-8">
       <div class="card p-4 h-100">
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <h5 class="mb-0"><i class="bi bi-graph-up"></i> Recent score trend</h5>
-          <a class="small" href="<?= e(base_url('history.php')) ?>">Full history &rarr;</a>
+        <div class="section-heading">
+          <h2>Score trend</h2>
+          <a class="small" href="<?= e(base_url('history.php')) ?>">View history <i class="bi bi-arrow-right"></i></a>
         </div>
         <?php if (!$chartRows): ?>
-          <div class="text-center text-muted py-5">
-            <i class="bi bi-bar-chart" style="font-size:2rem"></i>
-            <p class="mb-0 mt-2">Take your first exam to see your trend here.</p>
+          <div class="chart-frame d-flex flex-column justify-content-center align-items-start py-4">
+            <p class="text-muted mb-3">Your scores will appear here after your first exam.</p>
+            <a class="btn btn-outline-primary btn-sm" href="<?= e(base_url('exams.php')) ?>">Browse available exams</a>
           </div>
         <?php else: ?>
-          <canvas id="trendChart" height="120"></canvas>
+          <div class="chart-frame"><canvas id="trendChart"></canvas></div>
           <script>
             window.addEventListener('DOMContentLoaded', () => {
               const ctx = document.getElementById('trendChart');
@@ -102,9 +82,10 @@ include __DIR__ . '/includes/header.php';
                     label: 'Score %',
                     data: <?= json_encode(array_map(fn($r)=>$r['total_marks']>0 ? round($r['score']*100/$r['total_marks'],1) : 0, $chartRows)) ?>,
                     fill: true, tension: .35,
-                    borderColor: '#4f46e5',
-                    backgroundColor: 'rgba(79,70,229,.12)',
-                    pointBackgroundColor: '#4f46e5',
+                    borderColor: '#245b46',
+                    backgroundColor: 'rgba(36,91,70,.08)',
+                    pointBackgroundColor: '#245b46',
+                    borderWidth: 2,
                   }]
                 },
                 options: {
@@ -120,18 +101,18 @@ include __DIR__ . '/includes/header.php';
 
     <div class="col-lg-4">
       <div class="card p-4 h-100">
-        <h5 class="mb-3"><i class="bi bi-clock-history"></i> Recent attempts</h5>
+        <div class="section-heading"><h2>Recent attempts</h2><a class="small" href="<?= e(base_url('history.php')) ?>">All attempts</a></div>
         <?php if (!$recentAttempts): ?>
-          <p class="text-muted mb-0">No attempts yet.</p>
+          <p class="text-muted mb-0">You haven’t submitted an exam yet.</p>
         <?php else: ?>
-          <div class="vstack gap-2">
+          <div>
             <?php foreach ($recentAttempts as $a):
               $pct = $a['total_marks'] > 0 ? round($a['score'] * 100 / $a['total_marks'], 1) : 0;
             ?>
-              <a href="<?= e(base_url('result.php?id=' . (int) $a['id'])) ?>" class="d-flex justify-content-between align-items-center text-decoration-none p-2 rounded bg-soft">
-                <div>
-                  <div class="fw-semibold text-body"><?= e($a['quiz_title']) ?></div>
-                  <small class="text-muted"><?= e(date('d M, H:i', strtotime($a['submitted_at']))) ?></small>
+              <a href="<?= e(base_url('result.php?id=' . (int) $a['id'])) ?>" class="recent-row">
+                <div class="min-w-0">
+                  <div class="recent-title text-truncate"><?= e($a['quiz_title']) ?></div>
+                  <small class="text-muted"><?= e(date('d M Y', strtotime($a['submitted_at']))) ?></small>
                 </div>
                 <span class="badge bg-<?= $pct >= 70 ? 'success' : ($pct >= 50 ? 'warning' : 'danger') ?>"><?= $pct ?>%</span>
               </a>
@@ -142,12 +123,9 @@ include __DIR__ . '/includes/header.php';
     </div>
   </div>
 
-  <div class="card p-4 mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h5 class="mb-0"><i class="bi bi-collection"></i> Available exams</h5>
-      <span class="text-muted small"><?= (int) $quizCount ?> published</span>
-    </div>
-    <a href="<?= e(base_url('exams.php')) ?>" class="btn btn-outline-primary">See all exams &rarr;</a>
+  <div class="browse-strip">
+    <div><span class="eyebrow">Ready when you are</span><h2 class="h5 mb-1">Browse available exams</h2><p class="small text-muted mb-0"><?= (int) $quizCount ?> published exams</p></div>
+    <a href="<?= e(base_url('exams.php')) ?>" class="btn btn-outline-primary">See exams <i class="bi bi-arrow-right"></i></a>
   </div>
 </div>
 <?php include __DIR__ . '/includes/footer.php'; ?>

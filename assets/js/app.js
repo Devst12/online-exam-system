@@ -69,6 +69,25 @@
     });
   });
 
+  const examForm = document.getElementById('examForm');
+  if (examForm) {
+    const questionCount = parseInt(examForm.dataset.questionCount, 10) || 0;
+    const answerCount = document.querySelector('[data-answer-count]');
+    const updatePalette = () => {
+      const answered = new Set(Array.from(examForm.querySelectorAll('input[type="radio"]:checked')).map(input => input.name));
+      document.querySelectorAll('[data-jump-question]').forEach(button => {
+        const isAnswered = answered.has('ans[' + button.dataset.jumpQuestion + ']');
+        button.classList.toggle('is-answered', isAnswered);
+        button.title = 'Question ' + button.textContent.trim() + (isAnswered ? ' — answered' : ' — unanswered');
+      });
+      if (answerCount) answerCount.textContent = answered.size + '/' + questionCount;
+    };
+    examForm.addEventListener('change', event => {
+      if (event.target.matches('input[type="radio"]')) updatePalette();
+    });
+    updatePalette();
+  }
+
   // ---------- Confirm destructive actions ----------
   document.querySelectorAll('[data-confirm]').forEach(el => {
     el.addEventListener('click', (e) => {

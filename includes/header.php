@@ -19,8 +19,9 @@ $activeNav = $activeNav ?? '';
 <body>
 <nav class="navbar navbar-expand-lg sticky-top oes-navbar">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="<?= e(base_url('index.php')) ?>">
-      <i class="bi bi-mortarboard-fill"></i> <?= e(APP_NAME) ?>
+    <a class="navbar-brand fw-bold" href="<?= e(base_url('index.php')) ?>" aria-label="<?= e(APP_NAME) ?> home">
+      <span class="brand-mark" aria-hidden="true">OE</span>
+      <span class="brand-name"><?= e(APP_NAME) ?><small>EXAM PORTAL</small></span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -48,9 +49,9 @@ $activeNav = $activeNav ?? '';
 
         <?php if ($current): ?>
           <li class="nav-item dropdown ms-lg-2">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+            <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-person-circle"></i> <?= e($current['name']) ?>
-            </a>
+            </button>
             <ul class="dropdown-menu dropdown-menu-end">
               <?php if ($current['role'] === 'student'): ?>
                 <li><a class="dropdown-item" href="<?= e(base_url('profile.php')) ?>"><i class="bi bi-person"></i> Profile</a></li>

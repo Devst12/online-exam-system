@@ -24,9 +24,9 @@ $adminActive = 'attempts';
 include __DIR__ . '/_nav.php';
 ?>
 <div class="container">
-  <div class="d-flex flex-wrap justify-content-between align-items-end mb-3 gap-2">
-    <h3 class="mb-0">All attempts</h3>
-    <form class="d-flex gap-2 flex-wrap">
+  <div class="page-heading mt-2">
+    <div><span class="eyebrow">Activity</span><h1>Exam attempts</h1><p>Review submitted exams and individual results.</p></div>
+    <form class="admin-filters">
       <select name="quiz" class="form-select" onchange="this.form.submit()">
         <option value="0">All quizzes</option>
         <?php foreach ($quizzes as $q): ?>

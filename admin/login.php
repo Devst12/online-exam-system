@@ -33,12 +33,13 @@ include __DIR__ . '/../includes/header.php';
 ?>
 <div class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-md-5">
+    <div class="col-md-5 auth-panel">
       <div class="card p-4 p-md-5">
         <div class="text-center mb-3">
-          <div class="feature-icon mx-auto mb-2" style="width:56px;height:56px"><i class="bi bi-shield-lock"></i></div>
-          <h4 class="mb-0">Admin sign in</h4>
-          <small class="text-muted">Restricted access</small>
+          <div class="feature-icon mx-auto mb-2"><i class="bi bi-shield-lock"></i></div>
+          <span class="eyebrow">Staff account</span>
+          <h1 class="h3 mb-1">Admin sign in</h1>
+          <p class="small text-muted mb-0">For authorized exam administrators.</p>
         </div>
 
         <?php foreach ($errors as $err): ?>
@@ -48,12 +49,12 @@ include __DIR__ . '/../includes/header.php';
         <form method="post">
           <?= csrf_field() ?>
           <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input class="form-control" type="email" name="email" required autofocus value="<?= e($email) ?>">
+            <label class="form-label" for="email">Email address</label>
+            <input id="email" class="form-control" type="email" name="email" autocomplete="username" required autofocus value="<?= e($email) ?>">
           </div>
           <div class="mb-3">
-            <label class="form-label">Password</label>
-            <input class="form-control" type="password" name="password" required>
+            <label class="form-label" for="password">Password</label>
+            <input id="password" class="form-control" type="password" name="password" autocomplete="current-password" required>
           </div>
           <button class="btn btn-primary w-100"><i class="bi bi-box-arrow-in-right"></i> Sign in</button>
           <div class="text-center mt-3 small">

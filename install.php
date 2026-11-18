@@ -88,10 +88,11 @@ include __DIR__ . '/includes/header.php';
 ?>
 <div class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-lg-7">
+    <div class="col-lg-7 auth-panel auth-register">
       <div class="card p-4 p-md-5">
-        <h2 class="mb-1"><i class="bi bi-tools text-gradient"></i> One-time installer</h2>
-        <p class="text-muted">Sets up the database schema and creates your first admin account.</p>
+        <span class="eyebrow">Initial setup</span>
+        <h1 class="h3 mb-1">Configure the exam portal</h1>
+        <p class="text-muted">Set up the database and create your first administrator account.</p>
 
         <?php if ($done): ?>
           <div class="alert alert-success mt-3">

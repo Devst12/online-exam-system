@@ -122,8 +122,8 @@ $adminActive = 'quizzes';
 include __DIR__ . '/_nav.php';
 ?>
 <div class="container">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="mb-0">Quizzes</h3>
+  <div class="page-heading mt-2">
+    <div><span class="eyebrow">Assessment setup</span><h1>Quizzes</h1><p>Create an assessment, then add its questions.</p></div>
     <a class="btn btn-primary" href="<?= e(base_url('admin/quizzes.php?action=new')) ?>"><i class="bi bi-plus-lg"></i> New quiz</a>
   </div>
   <div class="card p-3">

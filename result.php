@@ -65,10 +65,10 @@ include __DIR__ . '/includes/header.php';
           · Time: <?= e(format_duration_seconds((int) $att['time_taken_sec'])) ?>
         </p>
         <div class="row g-2">
-          <div class="col-6 col-md-3"><div class="bg-soft p-3 rounded text-center"><div class="text-muted small">Score</div><div class="fs-4 fw-bold"><?= (int) $att['score'] ?>/<?= (int) $att['total_marks'] ?></div></div></div>
-          <div class="col-6 col-md-3"><div class="bg-soft p-3 rounded text-center"><div class="text-muted small">Correct</div><div class="fs-4 fw-bold text-success"><?= (int) $att['correct_count'] ?></div></div></div>
-          <div class="col-6 col-md-3"><div class="bg-soft p-3 rounded text-center"><div class="text-muted small">Wrong</div><div class="fs-4 fw-bold text-danger"><?= (int) $att['wrong_count'] ?></div></div></div>
-          <div class="col-6 col-md-3"><div class="bg-soft p-3 rounded text-center"><div class="text-muted small">Skipped</div><div class="fs-4 fw-bold text-warning"><?= (int) $att['unanswered_count'] ?></div></div></div>
+          <div class="col-6 col-md-3"><div class="result-metric"><div class="text-muted small">Score</div><div class="fs-4 fw-bold"><?= (int) $att['score'] ?>/<?= (int) $att['total_marks'] ?></div></div></div>
+          <div class="col-6 col-md-3"><div class="result-metric"><div class="text-muted small">Correct</div><div class="fs-4 fw-bold text-success"><?= (int) $att['correct_count'] ?></div></div></div>
+          <div class="col-6 col-md-3"><div class="result-metric"><div class="text-muted small">Wrong</div><div class="fs-4 fw-bold text-danger"><?= (int) $att['wrong_count'] ?></div></div></div>
+          <div class="col-6 col-md-3"><div class="result-metric"><div class="text-muted small">Skipped</div><div class="fs-4 fw-bold text-warning"><?= (int) $att['unanswered_count'] ?></div></div></div>
         </div>
 
         <div class="d-flex flex-wrap gap-2 mt-4">

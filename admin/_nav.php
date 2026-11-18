@@ -14,7 +14,7 @@ $items = [
 ?>
 <div class="container pt-3">
   <nav class="admin-nav mb-4" aria-label="Admin navigation">
-    <span class="small text-muted fw-semibold me-2">MANAGE</span>
+    <span class="admin-nav-label">ADMINISTRATION</span>
     <?php foreach ($items as $k => [$label, $url, $icon]): ?>
       <a class="admin-nav-link <?= $adminActive===$k ? 'active' : '' ?>" <?= $adminActive===$k ? 'aria-current="page"' : '' ?> href="<?= e(base_url($url)) ?>">
         <i class="bi <?= e($icon) ?>"></i> <?= e($label) ?>

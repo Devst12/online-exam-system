@@ -34,12 +34,14 @@ $adminActive = 'analytics';
 include __DIR__ . '/_nav.php';
 ?>
 <div class="container">
-  <h3 class="mb-3">Analytics</h3>
+  <div class="page-heading mt-2">
+    <div><span class="eyebrow">Reports</span><h1>Analytics</h1><p>Participation and results across your assessments.</p></div>
+  </div>
 
   <div class="row g-4">
     <div class="col-lg-7">
       <div class="card p-4">
-        <h5 class="mb-3"><i class="bi bi-calendar3"></i> Attempts (last 30 days)</h5>
+        <div class="section-heading"><h2>Attempts over time</h2><span class="small text-muted">Last 30 days</span></div>
         <canvas id="dayChart" height="120"></canvas>
         <script>
           window.addEventListener('DOMContentLoaded', () => {
@@ -48,7 +50,7 @@ include __DIR__ . '/_nav.php';
               data:{
                 labels: <?= json_encode(array_map(fn($r)=>date('d M',strtotime($r['d'])),$byDay)) ?>,
                 datasets:[{label:'Attempts', data: <?= json_encode(array_map(fn($r)=>(int)$r['c'],$byDay)) ?>,
-                  borderColor:'#4f46e5', backgroundColor:'rgba(79,70,229,.12)', fill:true, tension:.35}]
+                  borderColor:'#245b46', backgroundColor:'rgba(36,91,70,.08)', fill:true, tension:.25, borderWidth:2}]
               },
               options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true,ticks:{precision:0}}}}
             });
@@ -58,7 +60,7 @@ include __DIR__ . '/_nav.php';
     </div>
     <div class="col-lg-5">
       <div class="card p-4 h-100">
-        <h5 class="mb-3"><i class="bi bi-tags"></i> Avg accuracy by topic</h5>
+        <div class="section-heading"><h2>Average score by subject</h2></div>
         <?php if (!$byTag): ?>
           <p class="text-muted">No data yet.</p>
         <?php else: ?>
@@ -70,7 +72,7 @@ include __DIR__ . '/_nav.php';
                 data:{
                   labels: <?= json_encode(array_column($byTag,'tag')) ?>,
                   datasets:[{ data: <?= json_encode(array_map(fn($r)=>(float)$r['avg_pct'],$byTag)) ?>,
-                    backgroundColor:['#4f46e5','#06b6d4','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899'] }]
+                    backgroundColor:['#245b46','#779b83','#c77b42','#a6bdad','#6e7e73','#d6aa75','#435d50'] }]
                 },
                 options:{plugins:{legend:{position:'bottom'}}}
               });
@@ -82,7 +84,7 @@ include __DIR__ . '/_nav.php';
   </div>
 
   <div class="card p-3 mt-4">
-    <h5 class="mb-3"><i class="bi bi-list-ul"></i> Per-quiz summary</h5>
+    <div class="section-heading"><h2>Quiz summary</h2></div>
     <?php if (!$byQuiz): ?>
       <p class="text-muted">No quizzes yet.</p>
     <?php else: ?>

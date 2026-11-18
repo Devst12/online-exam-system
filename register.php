@@ -49,10 +49,11 @@ include __DIR__ . '/includes/header.php';
 ?>
 <div class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-7">
+    <div class="col-md-8 col-lg-7 auth-panel auth-register">
       <div class="card p-4 p-md-5">
-        <h3 class="mb-1">Create a student account</h3>
-        <p class="text-muted">Takes 30 seconds. No verification email required for the demo build.</p>
+        <span class="eyebrow">Student account</span>
+        <h1 class="h3 mb-1">Create your account</h1>
+        <p class="text-muted">Enter your details to get started.</p>
 
         <?php foreach ($errors as $err): ?>
           <div class="alert alert-danger"><i class="bi bi-exclamation-triangle"></i> <?= e($err) ?></div>
@@ -62,36 +63,36 @@ include __DIR__ . '/includes/header.php';
           <?= csrf_field() ?>
           <div class="row g-3">
             <div class="col-md-6">
-              <label class="form-label">Full name</label>
-              <input type="text" name="name" class="form-control" required minlength="2" value="<?= e($old['name']) ?>">
+              <label class="form-label" for="name">Full name</label>
+              <input id="name" type="text" name="name" class="form-control" autocomplete="name" required minlength="2" value="<?= e($old['name']) ?>">
             </div>
             <div class="col-md-6">
-              <label class="form-label">Email</label>
-              <input type="email" name="email" class="form-control" required value="<?= e($old['email']) ?>">
+              <label class="form-label" for="email">Email address</label>
+              <input id="email" type="email" name="email" class="form-control" autocomplete="email" required value="<?= e($old['email']) ?>">
             </div>
             <div class="col-md-6">
-              <label class="form-label">College</label>
-              <input type="text" name="college" class="form-control" value="<?= e($old['college']) ?>" placeholder="e.g. IIT Bombay">
+              <label class="form-label" for="college">College</label>
+              <input id="college" type="text" name="college" class="form-control" autocomplete="organization" value="<?= e($old['college']) ?>" placeholder="Optional">
             </div>
             <div class="col-md-6">
-              <label class="form-label">Mobile</label>
-              <input type="text" name="mobile" class="form-control" value="<?= e($old['mobile']) ?>" placeholder="Optional">
+              <label class="form-label" for="mobile">Mobile number</label>
+              <input id="mobile" type="tel" name="mobile" class="form-control" autocomplete="tel" value="<?= e($old['mobile']) ?>" placeholder="Optional">
             </div>
             <div class="col-md-4">
-              <label class="form-label">Gender</label>
-              <select name="gender" class="form-select">
+              <label class="form-label" for="gender">Gender</label>
+              <select id="gender" name="gender" class="form-select">
                 <option value="M" <?= $old['gender']==='M'?'selected':'' ?>>Male</option>
                 <option value="F" <?= $old['gender']==='F'?'selected':'' ?>>Female</option>
                 <option value="O" <?= $old['gender']==='O'?'selected':'' ?>>Other</option>
               </select>
             </div>
             <div class="col-md-4">
-              <label class="form-label">Password</label>
-              <input type="password" name="password" class="form-control" required minlength="6">
+              <label class="form-label" for="password">Password</label>
+              <input id="password" type="password" name="password" class="form-control" autocomplete="new-password" required minlength="6">
             </div>
             <div class="col-md-4">
-              <label class="form-label">Confirm password</label>
-              <input type="password" name="confirm" class="form-control" required minlength="6">
+              <label class="form-label" for="confirm">Confirm password</label>
+              <input id="confirm" type="password" name="confirm" class="form-control" autocomplete="new-password" required minlength="6">
             </div>
           </div>
           <button class="btn btn-primary w-100 btn-lg mt-4" type="submit">

@@ -34,12 +34,14 @@ $activeNav = 'history';
 include __DIR__ . '/includes/header.php';
 ?>
 <div class="container py-4">
-  <h2 class="mb-1">My attempt history</h2>
-  <p class="text-muted mb-4"><?= count($rows) ?> attempts total.</p>
+  <div class="page-heading">
+    <div><span class="eyebrow">Performance</span><h1>Attempt history</h1><p><?= count($rows) ?> attempts total.</p></div>
+    <a href="<?= e(base_url('exams.php')) ?>" class="btn btn-outline-primary">Find an exam</a>
+  </div>
 
   <?php if ($byTag): ?>
     <div class="card p-4 mb-4">
-      <h5 class="mb-3"><i class="bi bi-bullseye"></i> Accuracy by topic</h5>
+      <div class="section-heading"><h2>Average score by subject</h2></div>
       <canvas id="tagChart" height="100"></canvas>
       <script>
         window.addEventListener('DOMContentLoaded', () => {
@@ -50,8 +52,8 @@ include __DIR__ . '/includes/header.php';
               datasets: [{
                 label: 'Avg score %',
                 data: <?= json_encode(array_map(fn($r)=>(float)$r['avg_pct'], $byTag)) ?>,
-                backgroundColor: 'rgba(79,70,229,.65)',
-                borderRadius: 8,
+                backgroundColor: 'rgba(36,91,70,.72)',
+                borderRadius: 4,
               }]
             },
             options: { plugins:{legend:{display:false}}, scales:{ y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'}} } }

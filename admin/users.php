@@ -39,9 +39,9 @@ $adminActive = 'users';
 include __DIR__ . '/_nav.php';
 ?>
 <div class="container">
-  <div class="d-flex justify-content-between align-items-end mb-3">
-    <h3 class="mb-0">Students</h3>
-    <form class="d-flex gap-2"><input class="form-control" type="search" name="q" value="<?= e($search) ?>" placeholder="Search name/email/college"><button class="btn btn-primary"><i class="bi bi-search"></i></button></form>
+  <div class="page-heading mt-2">
+    <div><span class="eyebrow">People</span><h1>Students</h1><p>Search accounts and manage access.</p></div>
+    <form class="admin-filters"><input class="form-control" type="search" name="q" value="<?= e($search) ?>" placeholder="Search students" aria-label="Search students"><button class="btn btn-primary" aria-label="Search"><i class="bi bi-search"></i></button></form>
   </div>
   <div class="card p-3">
     <?php if (!$rows): ?>

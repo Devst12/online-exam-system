@@ -34,12 +34,9 @@ $adminActive = 'dashboard';
 include __DIR__ . '/_nav.php';
 ?>
 <div class="container">
-  <div class="d-flex justify-content-between align-items-end mb-3">
-    <div>
-      <h3 class="mb-1">Admin dashboard</h3>
-      <p class="text-muted mb-0">Welcome, <?= e($admin['name']) ?>.</p>
-    </div>
-    <a class="btn btn-primary" href="<?= e(base_url('admin/quizzes.php?action=new')) ?>"><i class="bi bi-plus-lg"></i> New quiz</a>
+  <div class="page-heading mt-2">
+    <div><span class="eyebrow">Administration</span><h1>Overview</h1><p>Welcome back, <?= e($admin['name']) ?>. Here is what is happening in your exam portal.</p></div>
+    <a class="btn btn-primary" href="<?= e(base_url('admin/quizzes.php?action=new')) ?>"><i class="bi bi-plus-lg"></i> Create quiz</a>
   </div>
 
   <div class="row g-3 mb-4">
@@ -53,11 +50,11 @@ include __DIR__ . '/_nav.php';
     foreach ($cards as [$label, $value, $icon]):
     ?>
       <div class="col-6 col-lg-3">
-        <div class="card p-3">
+        <div class="admin-stat h-100">
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <div class="text-muted small text-uppercase"><?= e($label) ?></div>
-              <div class="fs-3 fw-bold"><?= (int) $value ?></div>
+              <div class="stat-label"><?= e($label) ?></div>
+              <div class="stat-value"><?= (int) $value ?></div>
             </div>
             <div class="feature-icon"><i class="bi <?= e($icon) ?>"></i></div>
           </div>
@@ -69,7 +66,7 @@ include __DIR__ . '/_nav.php';
   <div class="row g-4">
     <div class="col-lg-7">
       <div class="card p-4 h-100">
-        <h5 class="mb-3"><i class="bi bi-graph-up"></i> Attempts in last 14 days</h5>
+        <div class="section-heading"><h2>Exam activity</h2><span class="small text-muted">Last 14 days</span></div>
         <?php if (!$series): ?>
           <p class="text-muted">No attempts in this window.</p>
         <?php else: ?>
@@ -81,7 +78,7 @@ include __DIR__ . '/_nav.php';
                 data:{
                   labels: <?= json_encode(array_map(fn($r)=>date('d M',strtotime($r['d'])),$series)) ?>,
                   datasets:[{label:'Attempts', data: <?= json_encode(array_map(fn($r)=>(int)$r['c'],$series)) ?>,
-                    backgroundColor:'rgba(6,182,212,.65)', borderRadius:8}]
+                    backgroundColor:'rgba(36,91,70,.72)', borderRadius:4}]
                 },
                 options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true,ticks:{precision:0}}}}
               });
@@ -92,15 +89,15 @@ include __DIR__ . '/_nav.php';
     </div>
     <div class="col-lg-5">
       <div class="card p-4 h-100">
-        <h5 class="mb-3"><i class="bi bi-clock-history"></i> Recent attempts</h5>
+        <div class="section-heading"><h2>Latest submissions</h2><a class="small" href="<?= e(base_url('admin/attempts.php')) ?>">All attempts</a></div>
         <?php if (!$recent): ?>
           <p class="text-muted">No attempts yet.</p>
         <?php else: ?>
-          <div class="vstack gap-2">
+          <div>
             <?php foreach ($recent as $a):
               $pct = $a['total_marks']>0 ? round($a['score']*100/$a['total_marks'],1) : 0;
             ?>
-              <a class="d-flex justify-content-between align-items-center text-decoration-none p-2 rounded bg-soft" href="<?= e(base_url('result.php?id='.(int)$a['id'])) ?>">
+              <a class="recent-row" href="<?= e(base_url('result.php?id='.(int)$a['id'])) ?>">
                 <div>
                   <div class="text-body small fw-semibold"><?= e($a['qtitle']) ?></div>
                   <small class="text-muted"><?= e($a['uname']) ?> · <?= e(date('d M, H:i', strtotime($a['submitted_at']))) ?></small>

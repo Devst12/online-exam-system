@@ -23,11 +23,8 @@ $activeNav = 'leaderboard';
 include __DIR__ . '/includes/header.php';
 ?>
 <div class="container py-4">
-  <div class="d-flex justify-content-between align-items-end mb-3">
-    <div>
-      <h2 class="mb-1"><i class="bi bi-trophy text-warning"></i> Leaderboard</h2>
-      <p class="text-muted mb-0">Top performers across all quizzes.</p>
-    </div>
+  <div class="page-heading">
+    <div><span class="eyebrow">Community</span><h1>Leaderboard</h1><p>Top performers across all quizzes.</p></div>
   </div>
   <div class="card p-3">
     <?php if (!$rows): ?>

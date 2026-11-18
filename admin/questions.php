@@ -105,7 +105,7 @@ if ($action === 'new' || $action === 'edit') {
     ?>
     <div class="container">
       <a href="<?= e(base_url('admin/questions.php?quiz='.$quizId)) ?>" class="text-decoration-none small text-muted">&larr; Back to questions</a>
-      <h3 class="mt-2 mb-3"><?= $editing ? 'Edit question' : 'New question' ?> · <small class="text-muted"><?= e($quiz['title']) ?></small></h3>
+      <div class="page-heading mt-2 mb-3"><div><span class="eyebrow"><?= e($quiz['title']) ?></span><h1><?= $editing ? 'Edit question' : 'New question' ?></h1></div></div>
       <?php foreach ($errors as $err): ?><div class="alert alert-danger"><?= e($err) ?></div><?php endforeach; ?>
       <div class="card p-4">
         <form method="post">
@@ -151,11 +151,8 @@ include __DIR__ . '/_nav.php';
 ?>
 <div class="container">
   <a href="<?= e(base_url('admin/quizzes.php')) ?>" class="text-decoration-none small text-muted">&larr; Back to quizzes</a>
-  <div class="d-flex justify-content-between align-items-end mt-2 mb-3">
-    <div>
-      <h3 class="mb-1"><?= e($quiz['title']) ?></h3>
-      <p class="text-muted mb-0"><?= count($questions) ?> question(s) · <?= (int) $quiz['duration_minutes'] ?> min</p>
-    </div>
+  <div class="page-heading mt-2">
+    <div><span class="eyebrow">Quiz questions</span><h1><?= e($quiz['title']) ?></h1><p><?= count($questions) ?> questions · <?= (int) $quiz['duration_minutes'] ?> minutes</p></div>
     <a class="btn btn-primary" href="<?= e(base_url('admin/questions.php?quiz='.$quizId.'&action=new')) ?>"><i class="bi bi-plus-lg"></i> Add question</a>
   </div>
 

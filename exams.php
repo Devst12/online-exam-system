@@ -27,12 +27,9 @@ $activeNav = 'exams';
 include __DIR__ . '/includes/header.php';
 ?>
 <div class="container py-4">
-  <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-2">
-    <div>
-      <h2 class="mb-1">Browse exams</h2>
-      <p class="text-muted mb-0"><?= count($quizzes) ?> exams ready to take.</p>
-    </div>
-    <form class="exam-filters d-flex flex-wrap gap-2" role="search">
+  <div class="page-heading">
+    <div><span class="eyebrow">Exam catalogue</span><h1>Available exams</h1><p><?= count($quizzes) ?> exams ready to take.</p></div>
+    <form class="exam-filters" role="search">
       <input class="form-control" type="search" name="q" value="<?= e($search) ?>" placeholder="Search exams…" aria-label="Search exams">
       <select class="form-select" name="tag" aria-label="Filter by subject" onchange="this.form.submit()">
         <option value="">All tags</option>
@@ -40,34 +37,30 @@ include __DIR__ . '/includes/header.php';
           <option value="<?= e($t) ?>" <?= $tag===$t?'selected':'' ?>><?= e($t) ?></option>
         <?php endforeach; ?>
       </select>
-      <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+      <button class="btn btn-primary" aria-label="Search"><i class="bi bi-search"></i></button>
     </form>
   </div>
 
   <?php if (!$quizzes): ?>
-    <div class="card p-5 text-center text-muted">
-      <i class="bi bi-inbox" style="font-size:2.5rem"></i>
-      <p class="mt-3 mb-0">No exams match your filters.</p>
+    <div class="card p-4">
+      <p class="mb-1 fw-semibold">No exams found</p>
+      <p class="text-muted mb-0">Try a different search or clear the subject filter.</p>
     </div>
   <?php else: ?>
-    <div class="row g-3">
+    <div class="exam-list">
       <?php foreach ($quizzes as $q): ?>
-        <div class="col-md-6 col-lg-4">
-          <div class="card exam-card h-100 p-4">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <span class="exam-tag"><?= e($q['tag'] ?: 'General') ?></span>
-              <small class="text-muted"><i class="bi bi-stopwatch"></i> <?= (int) $q['duration_minutes'] ?> min</small>
-            </div>
-            <h5 class="mt-2"><?= e($q['title']) ?></h5>
-            <p class="text-muted small flex-grow-1"><?= e($q['intro'] ?: 'A quick test to check your knowledge.') ?></p>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-              <small class="text-muted"><i class="bi bi-list-check"></i> <?= (int) $q['qcount'] ?> questions</small>
-              <a href="<?= e(base_url('take-exam.php?quiz=' . (int) $q['id'])) ?>" class="btn btn-primary btn-sm">
-                Start <i class="bi bi-arrow-right"></i>
-              </a>
+        <article class="exam-list-item">
+          <div>
+            <span class="exam-tag"><?= e($q['tag'] ?: 'General') ?></span>
+            <h3><?= e($q['title']) ?></h3>
+            <?php if ($q['intro']): ?><p class="small text-muted mb-2"><?= e($q['intro']) ?></p><?php endif; ?>
+            <div class="exam-meta">
+              <span><i class="bi bi-list-check"></i><?= (int) $q['qcount'] ?> questions</span>
+              <span><i class="bi bi-clock"></i><?= (int) $q['duration_minutes'] ?> minutes</span>
             </div>
           </div>
-        </div>
+          <a href="<?= e(base_url('take-exam.php?quiz=' . (int) $q['id'])) ?>" class="btn btn-primary exam-list-action">Start exam <i class="bi bi-arrow-right"></i></a>
+        </article>
       <?php endforeach; ?>
     </div>
   <?php endif; ?>

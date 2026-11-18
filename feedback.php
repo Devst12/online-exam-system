@@ -42,10 +42,11 @@ include __DIR__ . '/includes/header.php';
 ?>
 <div class="container py-4">
   <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-7">
+    <div class="col-md-8 col-lg-7 auth-panel">
       <div class="card p-4 p-md-5">
-        <h3 class="mb-1">Send us feedback</h3>
-        <p class="text-muted">Found a bug or have an idea? Drop us a note.</p>
+        <span class="eyebrow">Help improve the portal</span>
+        <h1 class="h3 mb-1">Send feedback</h1>
+        <p class="text-muted">Report an issue or share a suggestion with the team.</p>
 
         <?php if ($ok): ?>
           <div class="alert alert-success"><i class="bi bi-check-circle"></i> Thanks! Your feedback has been recorded.</div>

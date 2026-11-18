@@ -44,10 +44,11 @@ include __DIR__ . '/includes/header.php';
 ?>
 <div class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-5">
+    <div class="col-md-6 col-lg-5 auth-panel">
       <div class="card p-4 p-md-5">
-        <h3 class="mb-1">Welcome back</h3>
-        <p class="text-muted">Sign in to continue your exam journey.</p>
+        <span class="eyebrow">Student account</span>
+        <h1 class="h3 mb-1">Sign in</h1>
+        <p class="text-muted">Use your account to continue.</p>
 
         <?php foreach ($errors as $err): ?>
           <div class="alert alert-danger"><i class="bi bi-exclamation-triangle"></i> <?= e($err) ?></div>
@@ -56,14 +57,14 @@ include __DIR__ . '/includes/header.php';
         <form method="post" autocomplete="on">
           <?= csrf_field() ?>
           <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" required autofocus value="<?= e($email) ?>">
+            <label class="form-label" for="email">Email address</label>
+            <input id="email" type="email" name="email" class="form-control" autocomplete="username" required autofocus value="<?= e($email) ?>">
           </div>
           <div class="mb-3">
-            <label class="form-label d-flex justify-content-between">
+            <label class="form-label d-flex justify-content-between" for="password">
               <span>Password</span>
             </label>
-            <input type="password" name="password" class="form-control" required>
+            <input id="password" type="password" name="password" class="form-control" autocomplete="current-password" required>
           </div>
           <button class="btn btn-primary w-100 btn-lg" type="submit">
             <i class="bi bi-box-arrow-in-right"></i> Sign in
