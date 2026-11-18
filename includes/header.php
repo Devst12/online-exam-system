@@ -10,6 +10,7 @@ $activeNav = $activeNav ?? '';
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="<?= e(APP_TAGLINE) ?>">
 <title><?= e($pageTitle) ?> · <?= e(APP_NAME) ?></title>
+<script>try { document.documentElement.setAttribute('data-bs-theme', localStorage.getItem('oes-theme') || 'light'); } catch (e) {}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🎓</text></svg>">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -21,7 +22,7 @@ $activeNav = $activeNav ?? '';
     <a class="navbar-brand fw-bold" href="<?= e(base_url('index.php')) ?>">
       <i class="bi bi-mortarboard-fill"></i> <?= e(APP_NAME) ?>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMain">
@@ -40,7 +41,7 @@ $activeNav = $activeNav ?? '';
         <?php endif; ?>
 
         <li class="nav-item">
-          <button class="btn btn-outline-secondary btn-sm ms-lg-2" id="themeToggle" title="Toggle theme">
+          <button class="btn btn-outline-secondary btn-sm ms-lg-2" id="themeToggle" type="button" title="Toggle theme" aria-label="Toggle color theme">
             <i class="bi bi-moon-stars"></i>
           </button>
         </li>

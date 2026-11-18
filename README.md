@@ -63,45 +63,6 @@
 
 This project was deliberately designed to require **no Composer, no Node, no build step**. If you've got XAMPP running, you can be live in under two minutes.
 
-### 1. Clone into your web root
-
-```bash
-git clone https://github.com/aashishbharti04/online-exam-system.git
-# Move it into your XAMPP htdocs (Windows example):
-mv online-exam-system "/c/xampp/htdocs/online-exam-system"
-```
-
-### 2. Configure the database connection
-
-Open [`config/config.php`](config/config.php) and verify the values match your local MySQL:
-
-```php
-const DB_HOST = '127.0.0.1';
-const DB_PORT = 3306;
-const DB_NAME = 'online_exam_system';
-const DB_USER = 'root';
-const DB_PASS = '';        // XAMPP default
-```
-
-> Prefer to keep secrets out of git? Create `config/config.local.php` with your overrides — it's gitignored.
-
-### 3. Run the one-time installer
-
-Start Apache + MySQL in XAMPP, then in your browser:
-
-```
-http://localhost/online-exam-system/install.php
-```
-
-The installer will:
-
-1. Create the `online_exam_system` database
-2. Import all tables + 5 sample quizzes (15 questions)
-3. Create your **admin account** with a bcrypt-hashed password
-4. Optionally create a demo student (`student@oes.local` / `student@123`)
-
-When you're done, **delete `install.php`** from the server.
-
 ### 4. Sign in
 
 - **Student**: <http://localhost/online-exam-system/login.php>
@@ -263,7 +224,7 @@ Issues, bug reports, and feature requests are all welcome.
 
 ## 💬 Credits
 
-Built with ❤️ for students who deserve a clean starting point — not a 2015-era PHP tutorial.
+
 
 If this helped your project, consider giving the repo a ⭐ on GitHub!
 
@@ -288,5 +249,6 @@ If this helped your project, consider giving the repo a ⭐ on GitHub!
 *All rights reserved.*
 
 </div>
-#   o n l i n e - e x a m - s y s t e m  
+#   o n l i n e - e x a m - s y s t e m 
+ 
  

@@ -12,10 +12,13 @@ $items = [
     'analytics' => ['Analytics',   'admin/analytics.php',  'bi-graph-up-arrow'],
 ];
 ?>
-<div class="d-flex flex-wrap gap-1 mb-4 border-bottom pb-3">
-  <?php foreach ($items as $k => [$label, $url, $icon]): ?>
-    <a class="btn btn-sm <?= $adminActive===$k ? 'btn-primary' : 'btn-outline-secondary' ?>" href="<?= e(base_url($url)) ?>">
-      <i class="bi <?= e($icon) ?>"></i> <?= e($label) ?>
-    </a>
-  <?php endforeach; ?>
+<div class="container pt-3">
+  <nav class="admin-nav mb-4" aria-label="Admin navigation">
+    <span class="small text-muted fw-semibold me-2">MANAGE</span>
+    <?php foreach ($items as $k => [$label, $url, $icon]): ?>
+      <a class="admin-nav-link <?= $adminActive===$k ? 'active' : '' ?>" <?= $adminActive===$k ? 'aria-current="page"' : '' ?> href="<?= e(base_url($url)) ?>">
+        <i class="bi <?= e($icon) ?>"></i> <?= e($label) ?>
+      </a>
+    <?php endforeach; ?>
+  </nav>
 </div>

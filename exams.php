@@ -32,9 +32,9 @@ include __DIR__ . '/includes/header.php';
       <h2 class="mb-1">Browse exams</h2>
       <p class="text-muted mb-0"><?= count($quizzes) ?> exams ready to take.</p>
     </div>
-    <form class="d-flex flex-wrap gap-2">
-      <input class="form-control" type="search" name="q" value="<?= e($search) ?>" placeholder="Search exams…">
-      <select class="form-select" name="tag" onchange="this.form.submit()">
+    <form class="exam-filters d-flex flex-wrap gap-2" role="search">
+      <input class="form-control" type="search" name="q" value="<?= e($search) ?>" placeholder="Search exams…" aria-label="Search exams">
+      <select class="form-select" name="tag" aria-label="Filter by subject" onchange="this.form.submit()">
         <option value="">All tags</option>
         <?php foreach ($tags as $t): ?>
           <option value="<?= e($t) ?>" <?= $tag===$t?'selected':'' ?>><?= e($t) ?></option>

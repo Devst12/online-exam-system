@@ -58,6 +58,15 @@ include __DIR__ . '/includes/header.php';
     <?= csrf_field() ?>
     <input type="hidden" name="quiz_id" value="<?= (int) $quiz['id'] ?>">
 
+    <div class="card p-3 mb-3 d-lg-none">
+      <h6 class="mb-2"><i class="bi bi-grid-3x3-gap"></i> Jump to question</h6>
+      <div class="question-palette-mobile">
+        <?php foreach ($questions as $i => $q): ?>
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-jump-question="<?= (int) $q['id'] ?>" aria-label="Go to question <?= $i + 1 ?>"><?= $i + 1 ?></button>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
     <div class="row g-3">
       <div class="col-lg-9">
         <?php foreach ($questions as $i => $q):
